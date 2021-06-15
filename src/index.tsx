@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Demo from './pages/Home'
+import Demo from './pages';
+import {BrowserRouter} from 'react-router-dom'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Demo />
+    <BrowserRouter basename='zsrapp'>
+      <Demo />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
