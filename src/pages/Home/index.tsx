@@ -1,12 +1,14 @@
-import React, { ReactElement, Component, FC} from 'react';
-import {
-  Route,
-  Switch
-} from 'react-router-dom';
+import React, { ReactElement } from 'react';
 
 interface Props {}
 const Home = ({}: Props): ReactElement => {
-  return <>Home</>
+  return <div
+    style={{
+      height: '100%'
+    }}
+  >
+    Home
+  </div>
 }
 
 export default Home;

@@ -1,17 +1,18 @@
-import React, { ReactElement, Component, FC} from 'react';
+import React, { ReactElement, useState } from 'react';
 import {
   Route,
+  RouteComponentProps,
   Switch,
-  useRouteMatch
+  useRouteMatch,
+  withRouter
 } from 'react-router-dom';
 import {
   Layout,
-  Menu,
+  Breadcrumb
 } from 'antd';
-import { MenuInfo, menuList } from '../../config/navConfig';
+import { MenuInfo, menuMap, menuList } from '../../config/navConfig';
 import SideMenu from '../../components/SideMenu';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
-
 
 const {
   Content,
@@ -19,12 +20,12 @@ const {
   Sider
 } = Layout;
 
-interface Props {
+interface Props extends RouteComponentProps {
   menuInfos: MenuInfo[],
   onItemChange: MenuClickEventHandler
 }
 
-const Nav2 = ({ menuInfos, onItemChange }: Props): ReactElement => {
+const Nav2 = ({ menuInfos, onItemChange, location }: Props): ReactElement => {
 
   interface MatchProps {
     path: string,
@@ -36,6 +37,9 @@ const Nav2 = ({ menuInfos, onItemChange }: Props): ReactElement => {
     path,
     params
   }: MatchProps = useRouteMatch();
+
+  const initContentTitle: string[] = location.pathname.split('/').filter((e: string): boolean => !!e)
+  const [contentTitle, setContentTitle] = useState<string[]>(initContentTitle);
   
   const menuListParse = (menuInfos: MenuInfo[]): MenuInfo[] => {
     let menuList: MenuInfo[] = [];
@@ -46,17 +50,32 @@ const Nav2 = ({ menuInfos, onItemChange }: Props): ReactElement => {
     return menuList;
   }
 
-  console.log(menuListParse(menuList[2]));
+  const handleItemChange = (p: any) => {
+    const title = p.key.split('/').filter((e: string) => !!e);
+    setContentTitle(title);
+    onItemChange(p);
+  }
+  
+  const menuIndex: number = menuMap.get('/nav2') as number;
   
   return (
-    <Layout>
+    <Layout style={{ height: '100%' }} >
       <Sider style={{ overflow: 'scroll' }}>
-        <SideMenu onItemChange={onItemChange} menuInfos={menuInfos} ></SideMenu>
+        <SideMenu onItemChange={handleItemChange} menuInfos={menuInfos} ></SideMenu>
       </Sider>
       <Layout>
-        <Content>
+        <Breadcrumb style={{ margin: '10px 20px 5px' }} >
+          {
+            contentTitle.map((e: string): ReactElement => <Breadcrumb.Item>{e}</Breadcrumb.Item>)
+          }
+        </Breadcrumb>
+        <Content style={{ margin: '5px 20px 20px', backgroundColor: 'white' }} >
           <Switch>
-            
+            {
+              menuList?.[menuIndex] ? menuListParse(menuList[menuIndex]).map((menu: MenuInfo, index: number): ReactElement =>
+                <Route key={index} exact path={menu.linkTo} component={menu?.component} />
+              ) : null
+            }
           </Switch>
         </Content>
       </Layout>
@@ -64,4 +83,4 @@ const Nav2 = ({ menuInfos, onItemChange }: Props): ReactElement => {
   )
 }
 
-export default Nav2;
+export default withRouter(Nav2);

@@ -3,7 +3,7 @@ import {
   Menu
 } from 'antd';
 import { Link } from 'react-router-dom';
-import { RouteComponentProps, useRouteMatch, withRouter } from 'react-router'
+import { RouteComponentProps, withRouter } from 'react-router'
 import { MenuInfo } from '../../config/navConfig'
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 
@@ -52,7 +52,9 @@ function SideMenu(props: Props): ReactElement {
       theme="light"
       mode="inline"
       defaultSelectedKeys={[initPathKey]}
-      style={{ height: '100% '}}
+      style={{
+        height: '100%'
+      }}
     >
       {
         menuInfos ? menuInfos.map((menuInfo: MenuInfo, index: number): ReactElement => {

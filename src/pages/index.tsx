@@ -1,6 +1,5 @@
-import React, { ReactElement, FC, useState } from 'react';
-import { 
-  BrowserRouter,
+import React, { ReactElement, useState } from 'react';
+import {
   Switch,
   Route,
   Link,
@@ -18,7 +17,6 @@ import Nav2 from './Nav2';
 import Nav3 from './Nav3';
 
 import { MenuInfo, menuList, menuMap } from '../config/navConfig';
-import DMenu from '../components/DMenu';
 
 const {
   Header,
@@ -26,11 +24,6 @@ const {
   Footer,
   Sider
 } = Layout;
-
-const {
-  SubMenu
-} = Menu;
-
 
 interface Props extends RouteComponentProps{}
 
@@ -65,11 +58,13 @@ const Demo = (props: Props): ReactElement => {
 
   return (
     <Layout style={{ height: '100vh' }} >
-      <Header className="header">
+      <Header className="header" style={{ display: 'flex', padding: '0px' }}>
         <div className="logo"
           style={{
-            color: 'white'
-          }}/>
+            color: 'white',
+            width: '200px',
+            textAlign: 'center'
+          }}>logo</div>
         <Menu
           theme="dark"
           mode="horizontal"
@@ -87,34 +82,24 @@ const Demo = (props: Props): ReactElement => {
             <Home></Home>
           </Route>
           <Route path="/nav1">
-            <Nav1 menuInfos={menuList[1]} onItemChange={onNavSideMenuChange} /> 
+            <Nav1 menuInfos={menuList[menuMap.get('/nav1') as number]} onItemChange={onNavSideMenuChange} /> 
           </Route>
           <Route path="/nav2">
-            <Nav2 menuInfos={menuList[2]} onItemChange={onNavSideMenuChange} />
+            <Nav2 menuInfos={menuList[menuMap.get('/nav2') as number]} onItemChange={onNavSideMenuChange} />
           </Route>
           <Route path="/nav3">
-            <Nav3></Nav3>
+            <Nav3 menuInfos={menuList[menuMap.get('/nav3') as number]} onItemChange={onNavSideMenuChange} />
           </Route>
         </Switch>
       </Content>
-      {/* <Layout>
-        <Sider style={{ overflow: 'scroll' }}>
-          <DMenu menuInfos={menu} onNav1MenuChange={onNav1SideMenuChange} />
-        </Sider>
-        <Layout>
-          <Content>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/nav1" component={Nav1} />
-              <Route exact path="/nav2" component={Nav2} />
-              <Route exact path="/nav3" component={Nav3} />
-            </Switch>
-          </Content>
-          <Footer>
-            Footer ©2021 Create by Zsr
-          </Footer>
-        </Layout>
-      </Layout> */}
+      <Footer style={{
+        backgroundColor: '#041527',
+        color: 'white',
+        height: '64px',
+        textAlign: 'right'
+      }}>
+        Footer ©2021 Create by Zsr
+      </Footer>
     </Layout>
   )
 }

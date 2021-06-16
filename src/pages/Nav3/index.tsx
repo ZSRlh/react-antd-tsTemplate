@@ -1,18 +1,86 @@
-import React, { ReactElement, Component, FC} from 'react';
+import React, { ReactElement, useState } from 'react';
 import {
   Route,
-  Switch
+  RouteComponentProps,
+  Switch,
+  useRouteMatch,
+  withRouter
 } from 'react-router-dom';
+import {
+  Layout,
+  Breadcrumb
+} from 'antd';
+import { MenuInfo, menuMap, menuList } from '../../config/navConfig';
+import SideMenu from '../../components/SideMenu';
+import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 
-interface Props {}
-const Nav3 = ({}: Props): ReactElement => {
-  return <>nav3
-    {/* <Switch>
-      <Route exact path="/page2/sub1">subpage 2-1</Route>
-      <Route exact path="/page2/sub2">subpage 2-2</Route>
-      <Route exact path="/page2/sub3">subpage 2-3</Route>
-  </Switch> */}
-  </>
+const {
+  Content,
+  Footer,
+  Sider
+} = Layout;
+
+interface Props extends RouteComponentProps {
+  menuInfos: MenuInfo[],
+  onItemChange: MenuClickEventHandler
 }
 
-export default Nav3;
+const Nav3 = ({ menuInfos, onItemChange, location }: Props): ReactElement => {
+
+  interface MatchProps {
+    path: string,
+    url: string,
+    params: object
+  }
+  const {
+    url,
+    path,
+    params
+  }: MatchProps = useRouteMatch();
+
+  const initContentTitle: string[] = location.pathname.split('/').filter((e: string): boolean => !!e)
+  const [contentTitle, setContentTitle] = useState<string[]>(initContentTitle);
+  
+  const menuListParse = (menuInfos: MenuInfo[]): MenuInfo[] => {
+    let menuList: MenuInfo[] = [];
+    for (let i = 0; i < menuInfos.length; i++) {
+      const menuInfo: MenuInfo = menuInfos[i];
+      menuList = menuList.concat(menuInfo?.children ? menuListParse(menuInfo.children) : menuInfo)
+    }
+    return menuList;
+  }
+
+  const handleItemChange = (p: any) => {
+    const title = p.key.split('/').filter((e: string) => !!e);
+    setContentTitle(title);
+    onItemChange(p);
+  }
+
+  const menuIndex: number = menuMap.get('/nav3') as number;
+
+  return (
+    <Layout style={{ height: '100%' }} >
+      <Sider style={{ overflow: 'scroll' }}>
+        <SideMenu onItemChange={handleItemChange}  menuInfos={menuInfos}></SideMenu>
+      </Sider>
+      <Layout >
+        <Breadcrumb style={{ margin: '10px 20px 5px' }} >
+          {
+            contentTitle.map((e: string): ReactElement => <Breadcrumb.Item>{e}</Breadcrumb.Item>)
+          }
+        </Breadcrumb>
+        <Content style={{ margin: '5px 20px 20px', backgroundColor: 'white' }} >
+          <Switch>
+            {
+              menuList?.[menuIndex] ? menuListParse(menuList[menuIndex]).map((menu: MenuInfo, index: number): ReactElement => 
+                <Route key={index} exact path={menu.linkTo} component={menu?.component} />
+              ) : null
+            }
+          </Switch>
+        </Content>
+      </Layout>
+    </Layout>
+  )
+}
+
+export default withRouter(Nav3);
