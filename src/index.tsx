@@ -7,7 +7,7 @@ import {BrowserRouter} from 'react-router-dom'
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename='zsrapp'>
+    <BrowserRouter>
       <Demo />
     </BrowserRouter>
   </React.StrictMode>,

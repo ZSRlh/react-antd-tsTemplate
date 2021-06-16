@@ -6,13 +6,7 @@ import {
 
 interface Props {}
 const Home = ({}: Props): ReactElement => {
-  return <>Home
-    {/* <Switch>
-      <Route exact path="/page2/sub1">subpage 2-1</Route>
-      <Route exact path="/page2/sub2">subpage 2-2</Route>
-      <Route exact path="/page2/sub3">subpage 2-3</Route>
-  </Switch> */}
-  </>
+  return <>Home</>
 }
 
 export default Home;

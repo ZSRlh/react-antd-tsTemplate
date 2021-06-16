@@ -1,23 +1,14 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement } from 'react'
 import {
   Menu
 } from 'antd';
-import { 
-  BrowserRouter,
-  Switch,
-  Route,
-  Link,
-  withRouter,
-  RouteComponentProps
-} from 'react-router-dom';
-import {
-  MenuInfo
-} from '../../config/navConfig';
+import { Link } from 'react-router-dom';
+import { RouteComponentProps, useRouteMatch, withRouter } from 'react-router'
+import { MenuInfo } from '../../config/navConfig'
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 
-
 interface Props extends RouteComponentProps {
-  onNav1MenuChange: MenuClickEventHandler
+  onItemChange: MenuClickEventHandler,
   menuInfos: MenuInfo[]
 }
 
@@ -25,20 +16,15 @@ const {
   SubMenu
 } = Menu;
 
-function DMenu(props: Props): ReactElement {
-
+function SideMenu(props: Props): ReactElement {
+  
   const {
     menuInfos,
     location,
-    history,
-    onNav1MenuChange
+    onItemChange
   } = props;
 
   const initPathKey = location.pathname;
-
-  const handleMenuItemClick = (p: any) => {
-    onNav1MenuChange(p)
-  }
 
   const menuParse = (menu: MenuInfo, index: string): ReactElement => {
     const title = menu?.title;
@@ -55,7 +41,7 @@ function DMenu(props: Props): ReactElement {
     : <Menu.Item
         key={linkTo}
         title={title}
-        onClick={handleMenuItemClick}
+        onClick={onItemChange}
       >
       <Link to={linkTo}>{text}</Link>
     </Menu.Item>
@@ -66,17 +52,15 @@ function DMenu(props: Props): ReactElement {
       theme="light"
       mode="inline"
       defaultSelectedKeys={[initPathKey]}
-      style={{
-        height: '100%'
-      }}
+      style={{ height: '100% '}}
     >
       {
         menuInfos ? menuInfos.map((menuInfo: MenuInfo, index: number): ReactElement => {
-          return menuParse(menuInfo, `${index}`);
+          return menuParse(menuInfo, `${index}`)
         }) : null
       }
     </Menu>
   )
 }
 
-export default withRouter(DMenu);
+export default withRouter(SideMenu);
