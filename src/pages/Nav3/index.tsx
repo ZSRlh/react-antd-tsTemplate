@@ -69,7 +69,11 @@ const Nav3 = ({ menuInfos, onItemChange, location }: Props): ReactElement => {
             contentTitle.map((e: string): ReactElement => <Breadcrumb.Item>{e}</Breadcrumb.Item>)
           }
         </Breadcrumb>
-        <Content style={{ margin: '5px 20px 20px', backgroundColor: 'white' }} >
+        <Content style={{
+          margin: '5px 20px 20px',
+          backgroundColor: 'white',
+          overflow: 'scroll'
+        }} >
           <Switch>
             {
               menuList?.[menuIndex] ? menuListParse(menuList[menuIndex]).map((menu: MenuInfo, index: number): ReactElement => 

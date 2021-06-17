@@ -76,7 +76,7 @@ const Demo = (props: Props): ReactElement => {
           <Menu.Item key="/nav3" onClick={onClickNav}><Link to={`/nav3${nav3MenuState}`}>Nav3</Link></Menu.Item>
         </Menu>
       </Header>
-      <Content>
+      <Content style={{ overflow: 'scroll' }}>
         <Switch>
           <Route exact path="/">
             <Home></Home>
