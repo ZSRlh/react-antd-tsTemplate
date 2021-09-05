@@ -1,4 +1,4 @@
-import { JSXElementConstructor, ReactElement } from "react";
+import { JSXElementConstructor, ReactElement } from 'react';
 
 import Nav1Home from '../pages/Nav1/home';
 import Nav1Page1 from '../pages/Nav1/page1';
@@ -32,7 +32,7 @@ export const menuList: Array<MenuInfo[]> = [
       key: '1',
       title: 'Home',
       linkTo: '/',
-      text: 'Home',
+      text: 'Home'
     }
   ],
   [
@@ -99,7 +99,7 @@ export const menuList: Array<MenuInfo[]> = [
           linkTo: '/nav2/page2/sub2',
           text: 'Sub Option2',
           component: Nav2Page2Sub2
-        },
+        }
       ]
     },
     {
@@ -139,8 +139,8 @@ export const menuList: Array<MenuInfo[]> = [
       text: 'Option3',
       component: Nav3Page3
     }
-  ],
-]
+  ]
+];
 
 const menuMap = new Map([
   ['/', 0],
@@ -149,4 +149,4 @@ const menuMap = new Map([
   ['/nav3', 3]
 ]);
 
-export { menuMap }
+export { menuMap };

@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement } from 'react';
 import {
   Menu
 } from 'antd';
 import { Link } from 'react-router-dom';
-import { RouteComponentProps, withRouter } from 'react-router'
-import { MenuInfo } from '../../config/navConfig'
+import { RouteComponentProps, withRouter } from 'react-router';
+import { MenuInfo } from '../../config/navConfig';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 
 interface Props extends RouteComponentProps {
@@ -38,14 +38,14 @@ function SideMenu(props: Props): ReactElement {
         })
       }
     </SubMenu>
-    : <Menu.Item
+      : <Menu.Item
         key={linkTo}
         title={title}
         onClick={onItemChange}
       >
-      <Link to={linkTo}>{text}</Link>
-    </Menu.Item>
-  }
+        <Link to={linkTo}>{text}</Link>
+      </Menu.Item>;
+  };
 
   return (
     <Menu
@@ -58,11 +58,11 @@ function SideMenu(props: Props): ReactElement {
     >
       {
         menuInfos ? menuInfos.map((menuInfo: MenuInfo, index: number): ReactElement => {
-          return menuParse(menuInfo, `${index}`)
+          return menuParse(menuInfo, `${index}`);
         }) : null
       }
     </Menu>
-  )
+  );
 }
 
 export default withRouter(SideMenu);

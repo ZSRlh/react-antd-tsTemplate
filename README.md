@@ -18,7 +18,7 @@ You will also see any lint errors in the console.
 
 - 嵌套路由；
 
-## ts + eslint
+## ts + eslint + pre-commit
 
 1. 安装 eslint 及 ts 插件
 
@@ -59,5 +59,20 @@ yarn add @typescript-eslint/parser @typescript-eslint/eslint-plugin
   "enable": false
 },
 "eslint.debug": true,
+
+```
+
+4. 配置 pre-commit
+   在 package.json 中配置:
+
+```json
+"scripts": {
+  "lint": "eslint --ext .js,.ts,.tsx  src/",
+  ... ...
+},
+"pre-commit": [
+  "lint"
+]
+
 
 ```

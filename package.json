@@ -2,6 +2,9 @@
   "name": "demo",
   "version": "0.1.0",
   "private": true,
+  "pre-commit": [
+    "lint"
+  ],
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@testing-library/jest-dom": "^5.11.4",
@@ -18,6 +21,7 @@
     "antd": "^4.16.2",
     "craco-antd": "^1.19.0",
     "eslint": "^7.32.0",
+    "pre-commit": "^1.2.2",
     "query-string": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -32,7 +36,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "lint": "eslint --ext .js,.ts,.tsx test/ src/"
+    "lint": "eslint --ext .js,.ts,.tsx  src/"
   },
   "eslintConfig": {
     "extends": [
