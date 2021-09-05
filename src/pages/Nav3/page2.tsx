@@ -1,13 +1,9 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement } from 'react';
 
-interface Props {
-  
-}
-
-export default function Page2({}: Props): ReactElement {
+export default function Page2(): ReactElement {
   return (
     <div>
       Nav3 Page2
     </div>
-  )
+  );
 }

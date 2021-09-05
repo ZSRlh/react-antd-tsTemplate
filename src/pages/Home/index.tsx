@@ -1,14 +1,13 @@
 import React, { ReactElement } from 'react';
 
-interface Props {}
-const Home = ({}: Props): ReactElement => {
+const Home = (): ReactElement => {
   return <div
     style={{
       height: '100%'
     }}
   >
     Home
-  </div>
-}
+  </div>;
+};
 
 export default Home;

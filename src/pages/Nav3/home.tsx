@@ -1,13 +1,9 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement } from 'react';
 
-interface Props {
-  
-}
-
-export default function N3Home({}: Props): ReactElement {
+export default function N3Home(): ReactElement {
   return (
     <div>
       Nav3 Home
     </div>
-  )
+  );
 }

@@ -36,25 +36,25 @@ const Demo = (props: Props): ReactElement => {
   const onClickNav = (p: any) => {
     const { key } = p;
     setMenu(menuList[menuMap.get(key) as number]);
-  }
+  };
   
   const [nav1MenuState, setNav1MenuState] = useState('');
   const [nav2MenuState, setNav2MenuState] = useState('');
   const [nav3MenuState, setNav3MenuState] = useState('');
   
   const onNavSideMenuChange = (p: any) => {
-    const dirs = p.key.split("/");
+    const dirs = p.key.split('/');
     const firstDir = dirs[1];
     const suffixDir = dirs.slice(2).join('/');
 
     switch (firstDir) {
-      case 'nav1': setNav1MenuState(suffixDir ? `/${suffixDir}` : ''); break;
-      case 'nav2': setNav2MenuState(suffixDir ? `/${suffixDir}` : ''); break;
-      case 'nav3': setNav3MenuState(suffixDir ? `/${suffixDir}` : ''); break;
-      default: break;
+    case 'nav1': setNav1MenuState(suffixDir ? `/${suffixDir}` : ''); break;
+    case 'nav2': setNav2MenuState(suffixDir ? `/${suffixDir}` : ''); break;
+    case 'nav3': setNav3MenuState(suffixDir ? `/${suffixDir}` : ''); break;
+    default: break;
     }
 
-  }
+  };
 
   return (
     <Layout style={{ height: '100vh' }} >
@@ -101,7 +101,7 @@ const Demo = (props: Props): ReactElement => {
         Footer ©2021 Create by Zsr
       </Footer>
     </Layout>
-  )
-}
+  );
+};
 
 export default withRouter(Demo);

@@ -38,23 +38,23 @@ const Nav3 = ({ menuInfos, onItemChange, location }: Props): ReactElement => {
     params
   }: MatchProps = useRouteMatch();
 
-  const initContentTitle: string[] = location.pathname.split('/').filter((e: string): boolean => !!e)
+  const initContentTitle: string[] = location.pathname.split('/').filter((e: string): boolean => !!e);
   const [contentTitle, setContentTitle] = useState<string[]>(initContentTitle);
   
   const menuListParse = (menuInfos: MenuInfo[]): MenuInfo[] => {
     let menuList: MenuInfo[] = [];
     for (let i = 0; i < menuInfos.length; i++) {
       const menuInfo: MenuInfo = menuInfos[i];
-      menuList = menuList.concat(menuInfo?.children ? menuListParse(menuInfo.children) : menuInfo)
+      menuList = menuList.concat(menuInfo?.children ? menuListParse(menuInfo.children) : menuInfo);
     }
     return menuList;
-  }
+  };
 
   const handleItemChange = (p: any) => {
     const title = p.key.split('/').filter((e: string) => !!e);
     setContentTitle(title);
     onItemChange(p);
-  }
+  };
 
   const menuIndex: number = menuMap.get('/nav3') as number;
 
@@ -84,7 +84,7 @@ const Nav3 = ({ menuInfos, onItemChange, location }: Props): ReactElement => {
         </Content>
       </Layout>
     </Layout>
-  )
-}
+  );
+};
 
 export default withRouter(Nav3);
